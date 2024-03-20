@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="/">
+    <file alias="/AnalogClock">/Users/tofaramususa/Desktop/AnalogClock/build-AnalogClock-Qt_6_6_2_for_macOS-Debug/AnalogClock</file>
+
+  </qresource>
+</RCC>
