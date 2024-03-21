@@ -1,6 +1,0 @@
-<RCC>
-  <qresource prefix="/AnalogClock">
-    <file alias="qmldir">/Users/tofaramususa/Desktop/qt-clock/build-AnalogClock-Qt_6_6_2_for_macOS-Debug/AnalogClock/qmldir</file>
-  </qresource>
-</RCC>
-
