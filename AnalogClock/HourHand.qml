@@ -40,10 +40,8 @@ Item
                     root.rotation = (root.rotation + 3 + 360) % 360;
             }
         }
-
         onRotationChanged:
         {
-            parent.Root.Timer.running = false;
             if (rotation % 12 === 0)
             {
                 root.hours = rotation / 30;
