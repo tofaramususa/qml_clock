@@ -21,7 +21,7 @@ qt_add_qml_module(appAnalogClock
     QML_FILES HourHand.qml
     QML_FILES MinuteHand.qml
     QML_FILES SecondHand.qml
-    QML_FILES ModeButton.qml
+    QML_FILES
     QML_FILES
     QML_FILES TimeBox.qml
 )

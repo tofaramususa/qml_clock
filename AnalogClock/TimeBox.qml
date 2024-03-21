@@ -7,6 +7,7 @@ Item
     property int hours: parent.hours;
     property int minutes: parent.minutes;
     property int seconds: parent.seconds;
+    property string value: ""
 
     Rectangle
     {
@@ -21,7 +22,7 @@ Item
         Text
         {
             anchors.centerIn: parent
-            text: hours.toString().padStart(2, '0') + ":" + minutes.toString().padStart(2, '0')
+            text: (hours === 0 ? '12' : hours.toString()).padStart(2, '0') + ":" + minutes.toString().padStart(2, '0')
             font.bold: true
             color: "black"
             font.pixelSize: 20

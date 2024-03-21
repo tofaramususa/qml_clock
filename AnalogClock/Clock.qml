@@ -10,8 +10,6 @@ Item
     width: height
     anchors.centerIn: parent
 
-
-
     Timer {
             interval: 1000 // Interval in milliseconds
             running: true
@@ -46,7 +44,6 @@ Item
             border.color: "black"
             border.width: 10
 
-            //Index Position
             Repeater
             {
 
@@ -125,7 +122,7 @@ Item
                 bottom: root.bottom
                 horizontalCenter: parent.horizontalCenter
             }
-            rotation: (root.hours / 60) * 360
+            rotation: (root.hours / 12) * 360
             onUpdateHours:
             {
                 root.hours = newValue
@@ -143,6 +140,4 @@ Item
         }
 
         TimeBox {}
-
-        ModeButton {}
 }
