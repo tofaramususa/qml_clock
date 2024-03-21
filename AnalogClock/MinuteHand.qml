@@ -4,8 +4,11 @@ Item
 {
     id: root
     rotation: parent.rotation
+    property int minutes: 0
     property real minuteCoordinateX: 0
     property real minuteCoordinateY: 0
+
+    signal updateMinute(int newValue)
 
     Rectangle
     {
@@ -22,6 +25,7 @@ Item
 
         MouseArea
         {
+            id: minuteMouseArea
             anchors.fill: parent
 
             onPressed:
@@ -35,9 +39,17 @@ Item
 
                 var deltaX = mouseX - root.minuteCoordinateX;
                 if(deltaX < 0)
-                    root.rotation -= 6;
+                {
+                    root.rotation = (root.rotation - 3 + 360) % 360;
+
+                }
                 if(deltaX > 0)
-                    root.rotation += 6;
+                {
+                  root.rotation = (root.rotation + 3 + 360) % 360;
+                }
+
+                root.minutes = (root.rotation / 360) * 60
+                updateMinute(root.minutes)
             }
         }
     }

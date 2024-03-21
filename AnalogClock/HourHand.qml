@@ -1,16 +1,19 @@
 import QtQuick
 
-Item {
+Item
+{
     id: root
     rotation: parent.rotation
+    property int hours: 0
     property real hourCoordinateX: 0
     property real hourCoordinateY: 0
 
+    signal updateHours(int newValue)
     Rectangle
     {
         width: 10
         height: root.height * 0.3
-        color: "blue"
+        color: "#0000FF"
         radius: 4
         anchors
         {
@@ -33,14 +36,19 @@ Item {
 
                 var deltaX = mouseX - root.hourCoordinateX;
                 if(deltaX < 0)
-                    root.rotation -= 30;
+                    root.rotation = (root.rotation - 3 + 360) % 360;
                 if(deltaX > 0)
-                    root.rotation += 30;
+                    root.rotation = (root.rotation + 3 + 360) % 360;
             }
         }
+    }
 
-
-
-
+    onRotationChanged:
+    {
+        if (rotation % 12 === 0)
+        {
+            root.hours = rotation / 30;
+            updateHours(root.hours);
+        }
     }
 }

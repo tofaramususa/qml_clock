@@ -23,6 +23,7 @@ qt_add_qml_module(appAnalogClock
     QML_FILES SecondHand.qml
     QML_FILES Button.qml
     QML_FILES
+    QML_FILES TimeBox.qml
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

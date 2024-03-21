@@ -2,22 +2,23 @@ import QtQuick 2.15
 
 Item
 {
-        id: root
-        height: root.width < root.height ? root.width : root.height
-        width: height
-        anchors.centerIn: parent
-        property int hours: 5
-        property int minutes: 10
-        property int seconds: 30
+    property int hours: 5
+    property int minutes: 10
+    property int seconds: 30
+    id: root
+    height: root.width < root.height ? root.width : root.height
+    width: height
+    anchors.centerIn: parent
 
         Rectangle
         {
+            color: "#997950"
             id: rect
             height: root.height
             width: height
             radius: width/2
-            // color: root.color
             border.color: "black"
+            border.width: 10
 
             //Index Position
             Repeater
@@ -41,7 +42,7 @@ Item
                         height: parent.height * 0.05
                         width: height
                         radius: width / 2
-                        color: "white"
+                        color: "#997950"
                         anchors.horizontalCenter: parent.horizontalCenter
                         anchors.top: parent.top
                         anchors.topMargin: 15
@@ -85,6 +86,11 @@ Item
                 horizontalCenter: parent.horizontalCenter
             }
             rotation: (root.minutes / 60) * 360
+            minutes: root.minutes
+            onUpdateMinute:
+            {
+                root.minutes = newValue
+            }
         }
 
         HourHand
@@ -95,7 +101,12 @@ Item
                 bottom: root.bottom
                 horizontalCenter: parent.horizontalCenter
             }
-            rotation: (root.hours / 12) * 360
+            rotation: (root.hours / 60) * 360
+            hours: root.hours
+            onUpdateHours:
+            {
+                root.hours = newValue
+            }
         }
 
         Rectangle
@@ -107,4 +118,6 @@ Item
             radius: width/2
             color: "black"
         }
+
+        TimeBox {}
 }
