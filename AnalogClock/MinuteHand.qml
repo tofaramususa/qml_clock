@@ -36,19 +36,17 @@ Item
 
             onPositionChanged:
             {
-
                 var deltaX = mouseX - root.minuteCoordinateX;
-                if(deltaX < 0)
+                if (deltaX < 0)
                 {
-                    root.rotation = (root.rotation - 3 + 360) % 360;
+                    root.rotation = (root.rotation - 6 + 360) % 360;
 
                 }
-                if(deltaX > 0)
+                if (deltaX > 0)
                 {
-                  root.rotation = (root.rotation + 3 + 360) % 360;
+                  root.rotation = (root.rotation + 6 + 360) % 360;
                 }
-
-                root.minutes = (root.rotation / 360) * 60
+                root.minutes = root.rotation / 60
                 updateMinute(root.minutes)
             }
         }

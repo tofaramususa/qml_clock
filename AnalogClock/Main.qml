@@ -28,7 +28,6 @@ Window
             color: "blue"
             font.bold: true
         }
-
         anchors.bottom: clock.top
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottomMargin: 20

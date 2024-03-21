@@ -20,6 +20,7 @@ Item
             horizontalCenter: root.horizontalCenter
             bottom: root.verticalCenter
         }
+        y: root.height * 0.5
 
         MouseArea
         {
@@ -39,16 +40,12 @@ Item
                     root.rotation = (root.rotation - 3 + 360) % 360;
                 if(deltaX > 0)
                     root.rotation = (root.rotation + 3 + 360) % 360;
+                if (rotation % 12 === 0)
+                {
+                    root.hours = rotation / 30;
+                    updateHours(root.hours);
+                }
             }
-        }
-    }
-
-    onRotationChanged:
-    {
-        if (rotation % 12 === 0)
-        {
-            root.hours = rotation / 30;
-            updateHours(root.hours);
         }
     }
 }

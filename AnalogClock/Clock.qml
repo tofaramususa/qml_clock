@@ -2,13 +2,39 @@ import QtQuick 2.15
 
 Item
 {
-    property int hours: 5
-    property int minutes: 10
-    property int seconds: 30
     id: root
+    property int hours: 4
+    property int minutes: 59
+    property int seconds: 55
     height: root.width < root.height ? root.width : root.height
     width: height
     anchors.centerIn: parent
+
+
+
+    Timer {
+            interval: 1000 // Interval in milliseconds
+            running: true
+            repeat: true
+            onTriggered:
+            {
+                root.seconds++
+                if (root.seconds == 60)
+                {
+                    root.seconds = 0;
+                    root.minutes += 1;
+                    if (root.minutes == 60)
+                    {
+                        root.minutes = 0;
+                        root.hours++;
+                        if (root.hours == 13)
+                        {
+                            hours = 1;
+                        }
+                    }
+                }
+            }
+        }
 
         Rectangle
         {
@@ -48,7 +74,6 @@ Item
                         anchors.topMargin: 15
                     }
 
-                    //Replace Index with number
                     Text
                     {
                         anchors
@@ -86,7 +111,6 @@ Item
                 horizontalCenter: parent.horizontalCenter
             }
             rotation: (root.minutes / 60) * 360
-            minutes: root.minutes
             onUpdateMinute:
             {
                 root.minutes = newValue
@@ -102,7 +126,6 @@ Item
                 horizontalCenter: parent.horizontalCenter
             }
             rotation: (root.hours / 60) * 360
-            hours: root.hours
             onUpdateHours:
             {
                 root.hours = newValue
@@ -120,4 +143,6 @@ Item
         }
 
         TimeBox {}
+
+        ModeButton {}
 }
