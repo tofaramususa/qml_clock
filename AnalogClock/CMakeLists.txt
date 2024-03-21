@@ -17,11 +17,12 @@ qt_add_qml_module(appAnalogClock
     VERSION 1.0
     QML_FILES Main.qml
     QML_FILES
-    QML_FILES ClockFace.qml
-    QML_FILES HourNeedle.qml
-    QML_FILES MinuteNeedle.qml
-    QML_FILES SecondNeedle.qml
+    QML_FILES Clock.qml
+    QML_FILES HourHand.qml
+    QML_FILES MinuteHand.qml
+    QML_FILES SecondHand.qml
     QML_FILES Button.qml
+    QML_FILES
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

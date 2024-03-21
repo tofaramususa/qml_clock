@@ -6,32 +6,22 @@ Item
         height: root.width < root.height ? root.width : root.height
         width: height
         anchors.centerIn: parent
-        // border.width: 10
-        // property int hours: currentDate.getHours()
-        // property int minutes: currentDate.getMinutes()
-        // property int seconds: currentDate.getSeconds()
-        // property var currentDate: new Date()
-
-        // Timer {
-        // id: timer
-        // repeat: true
-        // interval: 1000
-        // running: true
-
-        // onTriggered: root.currentDate = new Date()
-        // }
+        property int hours: 5
+        property int minutes: 10
+        property int seconds: 30
 
 Rectangle
 {
+    id: rect
     height: root.height
     width: height
     radius: width/2
     // color: root.color
     border.color: "black"
 
-
     //Index Position
-    Repeater {
+    Repeater
+    {
 
         model: 12
 
@@ -56,8 +46,10 @@ Rectangle
             }
 
             //Replace Index with number
-            Text {
-                anchors {
+            Text
+            {
+                anchors
+                {
                     horizontalCenter: parent.horizontalCenter
                 }
                 x: 0
@@ -69,8 +61,10 @@ Rectangle
             }
         }
     }
-    //Rectangle
-    Rectangle {
+}
+
+    Rectangle
+    {
         id: id_center;
         anchors.centerIn: parent
         height: root.height* 0.05
@@ -78,35 +72,37 @@ Rectangle
         radius: width/2
         color: "black"
     }
-}
 
-SecondNeedle {
+// SecondHand {
+//     anchors
+//     {
+//         top: root.top
+//         bottom: root.bottom
+//         horizontalCenter: parent.horizontalCenter
+//     }
+//     value: root.seconds
+// }
+
+MinuteHand
+{
     anchors
     {
         top: root.top
         bottom: root.bottom
         horizontalCenter: parent.horizontalCenter
     }
-    value: root.seconds
+    rotation: (root.minutes / 60) * 360
 }
 
-MinuteNeedle {
-    anchors
-    {
-        top: root.top
-        bottom: root.bottom
-        horizontalCenter: parent.horizontalCenter
-    }
-    value: root.minutes
-}
-
-HourNeedle {
-    anchors
-    {
-        top: root.top
-        bottom: root.bottom
-        horizontalCenter: parent.horizontalCenter
-    }
-    value: root.hour
-    }
+// HourHand
+// {
+//     anchors
+//     {
+//         top: root.top
+//         bottom: root.bottom
+//         horizontalCenter: parent.horizontalCenter
+//     }
+//     value: root.hour
+//     }
+// }
 }

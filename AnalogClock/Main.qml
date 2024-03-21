@@ -1,12 +1,13 @@
 import QtQuick 2.15
 
-Window {
+Window
+{
     width: 640
     height: 480
     visible: true
     title: qsTr("Analog Clock")
 
-    ClockFace
+    Clock
     {
         id: clock
         width: 350
