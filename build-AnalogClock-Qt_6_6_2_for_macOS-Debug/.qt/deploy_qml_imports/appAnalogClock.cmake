@@ -9,7 +9,7 @@ endif()
 
 _qt_internal_deploy_qml_imports_for_target(
     ${__qt_opts}
-    IMPORTS_FILE "/Users/tofaramususa/Desktop/AnalogClock/build-AnalogClock-Qt_6_6_2_for_macOS-Debug/.qt_plugins/Qt6_QmlPlugins_Imports_appAnalogClock.cmake"
+    IMPORTS_FILE "/Users/tofaramususa/Desktop/qt-clock/build-AnalogClock-Qt_6_6_2_for_macOS-Debug/.qt_plugins/Qt6_QmlPlugins_Imports_appAnalogClock.cmake"
     PLUGINS_FOUND __qt_internal_plugins_found
     QML_DIR     "appAnalogClock.app/Contents/Resources/qml"
     PLUGINS_DIR "appAnalogClock.app/Contents/PlugIns"

@@ -2,9 +2,9 @@ module AnalogClock
 typeinfo appAnalogClock.qmltypes
 prefer :/AnalogClock/
 Main 1.0 Main.qml
-ClockFace 1.0 ClockFace.qml
-HourNeedle 1.0 HourNeedle.qml
-MinuteNeedle 1.0 MinuteNeedle.qml
-SecondNeedle 1.0 SecondNeedle.qml
-Button 1.0 Button.qml
+Clock 1.0 Clock.qml
+HourHand 1.0 HourHand.qml
+MinuteHand 1.0 MinuteHand.qml
+SecondHand 1.0 SecondHand.qml
+TimeBox 1.0 TimeBox.qml
 

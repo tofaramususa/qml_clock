@@ -1,4 +1,4 @@
-# Install script for directory: /Users/tofaramususa/Desktop/AnalogClock/AnalogClock
+# Install script for directory: /Users/tofaramususa/Desktop/qt-clock/AnalogClock
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -38,7 +38,7 @@ if(NOT DEFINED CMAKE_OBJDUMP)
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/." TYPE DIRECTORY FILES "/Users/tofaramususa/Desktop/AnalogClock/build-AnalogClock-Qt_6_6_2_for_macOS-Debug/appAnalogClock.app" USE_SOURCE_PERMISSIONS)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/." TYPE DIRECTORY FILES "/Users/tofaramususa/Desktop/qt-clock/build-AnalogClock-Qt_6_6_2_for_macOS-Debug/appAnalogClock.app" USE_SOURCE_PERMISSIONS)
   if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/./appAnalogClock.app/Contents/MacOS/appAnalogClock" AND
      NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/./appAnalogClock.app/Contents/MacOS/appAnalogClock")
     execute_process(COMMAND /usr/bin/install_name_tool
@@ -56,5 +56,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/tofaramususa/Desktop/AnalogClock/build-AnalogClock-Qt_6_6_2_for_macOS-Debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/tofaramususa/Desktop/qt-clock/build-AnalogClock-Qt_6_6_2_for_macOS-Debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

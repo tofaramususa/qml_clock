@@ -1,11 +1,11 @@
 <RCC>
   <qresource prefix="/AnalogClock/">
-    <file alias="Main.qml">/Users/tofaramususa/Desktop/AnalogClock/AnalogClock/Main.qml</file>
-    <file alias="ClockFace.qml">/Users/tofaramususa/Desktop/AnalogClock/AnalogClock/ClockFace.qml</file>
-    <file alias="HourNeedle.qml">/Users/tofaramususa/Desktop/AnalogClock/AnalogClock/HourNeedle.qml</file>
-    <file alias="MinuteNeedle.qml">/Users/tofaramususa/Desktop/AnalogClock/AnalogClock/MinuteNeedle.qml</file>
-    <file alias="SecondNeedle.qml">/Users/tofaramususa/Desktop/AnalogClock/AnalogClock/SecondNeedle.qml</file>
-    <file alias="Button.qml">/Users/tofaramususa/Desktop/AnalogClock/AnalogClock/Button.qml</file>
+    <file alias="Main.qml">/Users/tofaramususa/Desktop/qt-clock/AnalogClock/Main.qml</file>
+    <file alias="Clock.qml">/Users/tofaramususa/Desktop/qt-clock/AnalogClock/Clock.qml</file>
+    <file alias="HourHand.qml">/Users/tofaramususa/Desktop/qt-clock/AnalogClock/HourHand.qml</file>
+    <file alias="MinuteHand.qml">/Users/tofaramususa/Desktop/qt-clock/AnalogClock/MinuteHand.qml</file>
+    <file alias="SecondHand.qml">/Users/tofaramususa/Desktop/qt-clock/AnalogClock/SecondHand.qml</file>
+    <file alias="TimeBox.qml">/Users/tofaramususa/Desktop/qt-clock/AnalogClock/TimeBox.qml</file>
   </qresource>
 </RCC>
 

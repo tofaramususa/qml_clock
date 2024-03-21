@@ -1,6 +1,6 @@
 /AnalogClock/Main.qml
-/AnalogClock/ClockFace.qml
-/AnalogClock/HourNeedle.qml
-/AnalogClock/MinuteNeedle.qml
-/AnalogClock/SecondNeedle.qml
-/AnalogClock/Button.qml
+/AnalogClock/Clock.qml
+/AnalogClock/HourHand.qml
+/AnalogClock/MinuteHand.qml
+/AnalogClock/SecondHand.qml
+/AnalogClock/TimeBox.qml

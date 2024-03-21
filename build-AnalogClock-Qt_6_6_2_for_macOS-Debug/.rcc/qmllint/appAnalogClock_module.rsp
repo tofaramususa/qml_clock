@@ -1,10 +1,10 @@
 -I
-/Users/tofaramususa/Desktop/AnalogClock/build-AnalogClock-Qt_6_6_2_for_macOS-Debug
+/Users/tofaramususa/Desktop/qt-clock/build-AnalogClock-Qt_6_6_2_for_macOS-Debug
 -I
 /Users/tofaramususa/Qt/6.6.2/macos/./qml
 --resource
-/Users/tofaramususa/Desktop/AnalogClock/build-AnalogClock-Qt_6_6_2_for_macOS-Debug/.rcc/qmake_AnalogClock.qrc
+/Users/tofaramususa/Desktop/qt-clock/build-AnalogClock-Qt_6_6_2_for_macOS-Debug/.rcc/qmake_AnalogClock.qrc
 --resource
-/Users/tofaramususa/Desktop/AnalogClock/build-AnalogClock-Qt_6_6_2_for_macOS-Debug/.rcc/appAnalogClock_raw_qml_0.qrc
+/Users/tofaramususa/Desktop/qt-clock/build-AnalogClock-Qt_6_6_2_for_macOS-Debug/.rcc/appAnalogClock_raw_qml_0.qrc
 --module
 AnalogClock
