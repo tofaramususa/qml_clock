@@ -11,7 +11,7 @@ Item
     anchors.centerIn: parent
 
     Timer {
-            interval: 1000 // Interval in milliseconds
+            interval: 1000 //milliseconds
             running: true
             repeat: true
             onTriggered:

@@ -46,7 +46,7 @@ Item
                 {
                   root.rotation = (root.rotation + 6 + 360) % 360;
                 }
-                root.minutes = root.rotation / 6
+                root.minutes = (root.rotation / 360) * 60
                 updateMinute(root.minutes)
             }
         }

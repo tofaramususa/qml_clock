@@ -40,13 +40,14 @@ Item
                     root.rotation = (root.rotation + 3 + 360) % 360;
             }
         }
-        onRotationChanged:
+    }
+
+    onRotationChanged:
+    {
+        if (rotation % 12 === 0)
         {
-            if (rotation % 12 === 0)
-            {
-                root.hours = rotation / 30;
-                updateHours(root.hours);
-            }
+            root.hours = (rotation / 360) * 12;
+            updateHours(root.hours);
         }
     }
 }
