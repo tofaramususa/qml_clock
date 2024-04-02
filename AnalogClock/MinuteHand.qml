@@ -20,7 +20,7 @@ Item
         {
             horizontalCenter: root.horizontalCenter
         }
-        y: 45
+        y: 60
 
         MouseArea
         {

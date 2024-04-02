@@ -43,7 +43,7 @@ Item
             width: height
             radius: width/2
             border.color: "black"
-            border.width: 30
+            border.width: 40
 
             Repeater
             {
@@ -69,7 +69,7 @@ Item
                         color: "black"
                         anchors.horizontalCenter: parent.horizontalCenter
                         anchors.top: parent.top
-                        anchors.topMargin: 30
+                        anchors.topMargin: 40
                         antialiasing: true
                     }
 
@@ -80,7 +80,7 @@ Item
                         {
                             horizontalCenter: parent.horizontalCenter
                             top: parent.top
-                            topMargin: 50
+                            topMargin: 60
                         }
                         x: 0
                         y: parent.height * 0.06
@@ -88,8 +88,8 @@ Item
                         text: hourContainer.hour == 0 ? 12 : hourContainer.hour
                         font.pixelSize: parent.height * 0.2
                         font.family: "helveticaneue"
+                        font.weight: 800
                         font.bold: true
-                        font.weight: 900
                     }
 
                     Text
@@ -99,15 +99,15 @@ Item
                         {
                             horizontalCenter: parent.horizontalCenter
                             top: parent.top
-                            topMargin: 5
+                            topMargin: 10
                         }
                         x: 0
                         y: parent.height * 0.06
                         rotation: 360 - index * 30
                         text: hourContainer.hour == 0 ? "00" : (hourContainer.hour * 5)
-                        font.pixelSize: parent.height * 0.05
+                        font.pixelSize: parent.height * 0.06
                         font.family: "helveticaneue"
-                        font.weight: 900
+                        font.weight: 800
                         color: "white"
                         font.bold: true
                     }
@@ -137,7 +137,7 @@ Item
                         color: "black"
                         anchors.horizontalCenter: parent.horizontalCenter
                         anchors.top: parent.top
-                        anchors.topMargin: 25
+                        anchors.topMargin: 40
                         antialiasing: true
                     }
                 }
@@ -193,8 +193,8 @@ Item
         Rectangle
         {
             id: timeBox
-            width: 120
-            height: 50
+            width: 130
+            height: 60
             color: "white"
             opacity: 0.9
             anchors.horizontalCenter: clock.horizontalCenter
