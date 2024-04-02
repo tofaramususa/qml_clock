@@ -8,13 +8,13 @@ Item
     Rectangle
     {
         width: 5
-        height: root.height * 0.6;
+        height: root.height * 0.5;
         radius: 0.23
         color: "black"
         anchors
         {
             horizontalCenter: root.horizontalCenter
         }
-        y: root.height * 0.05
+        y: 50
     }
 }

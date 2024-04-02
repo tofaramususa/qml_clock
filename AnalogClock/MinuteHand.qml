@@ -13,15 +13,14 @@ Item
     Rectangle
     {
         id: rect
-        width: 9
-        height: root.height * 0.5;
-        radius: 4
+        width: 15
+        height: root.height * 0.45;
         color: "black"
         anchors
         {
             horizontalCenter: root.horizontalCenter
         }
-        y: root.height * 0.06
+        y: 45
 
         MouseArea
         {
@@ -50,5 +49,6 @@ Item
                 updateMinute(root.minutes)
             }
         }
+        antialiasing: true
     }
 }

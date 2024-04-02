@@ -11,16 +11,15 @@ Item
     signal updateHours(int newValue)
     Rectangle
     {
-        width: 10
+        width: 15
         height: root.height * 0.3
-        color: "#0000FF"
-        radius: 4
+        color: "black"
         anchors
         {
             horizontalCenter: root.horizontalCenter
-            bottom: root.verticalCenter
         }
 
+        y: 150
         MouseArea
         {
             anchors.fill: parent
@@ -40,6 +39,7 @@ Item
                     root.rotation = (root.rotation + 3 + 360) % 360;
             }
         }
+        antialiasing: true
     }
 
     onRotationChanged:

@@ -10,6 +10,7 @@ Item
     width: height
     anchors.centerIn: parent
 
+
     Timer {
             interval: 1000 //milliseconds
             running: true
@@ -36,13 +37,13 @@ Item
 
         Rectangle
         {
-            color: "#997950"
-            id: rect
+            color: "white"
+            id: clock
             height: root.height
             width: height
             radius: width/2
             border.color: "black"
-            border.width: 10
+            border.width: 30
 
             Repeater
             {
@@ -62,32 +63,89 @@ Item
 
                     Rectangle
                     {
-                        height: parent.height * 0.05
-                        width: height
-                        radius: width / 2
-                        color: "#997950"
+
+                        height: parent.height * 0.07
+                        width: parent.height * 0.02
+                        color: "black"
                         anchors.horizontalCenter: parent.horizontalCenter
                         anchors.top: parent.top
-                        anchors.topMargin: 15
+                        anchors.topMargin: 30
+                        antialiasing: true
                     }
 
                     Text
                     {
+                        id: hourText
                         anchors
                         {
                             horizontalCenter: parent.horizontalCenter
+                            top: parent.top
+                            topMargin: 50
                         }
                         x: 0
                         y: parent.height * 0.06
                         rotation: 360 - index * 30
                         text: hourContainer.hour == 0 ? 12 : hourContainer.hour
                         font.pixelSize: parent.height * 0.2
-                        font.family: "Arial"
+                        font.family: "helveticaneue"
+                        font.bold: true
+                        font.weight: 900
+                    }
+
+                    Text
+                    {
+                        id: minuteText
+                        anchors
+                        {
+                            horizontalCenter: parent.horizontalCenter
+                            top: parent.top
+                            topMargin: 5
+                        }
+                        x: 0
+                        y: parent.height * 0.06
+                        rotation: 360 - index * 30
+                        text: hourContainer.hour == 0 ? "00" : (hourContainer.hour * 5)
+                        font.pixelSize: parent.height * 0.05
+                        font.family: "helveticaneue"
+                        font.weight: 900
+                        color: "white"
+                        font.bold: true
+                    }
+
+                }
+            }
+
+            Repeater {
+
+                model: 60
+
+                Item
+                {
+                    id: minuteContainer
+
+                    property int minute: index
+                    height: parent.height / 2
+                    transformOrigin: Item.Bottom
+                    rotation: index * 6
+                    x: parent.width / 2
+                    y: 0
+
+                    Rectangle
+                    {
+                        height: parent.height * 0.05
+                        width: parent.height * 0.005
+                        color: "black"
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        anchors.top: parent.top
+                        anchors.topMargin: 25
+                        antialiasing: true
                     }
                 }
+
             }
         }
 
+        //where we draw and rotate second hand
         SecondHand
         {
             anchors
@@ -99,6 +157,8 @@ Item
             rotation: (root.seconds / 60) * 360
         }
 
+
+        //where we draw and rotate the minute hand
         MinuteHand
         {
             anchors
@@ -114,6 +174,7 @@ Item
             }
         }
 
+        //where we draw and rotate the hour hand
         HourHand
         {
             anchors
@@ -131,13 +192,25 @@ Item
 
         Rectangle
         {
-            id: id_center;
-            anchors.centerIn: parent
-            height: root.height* 0.05
-            width: height
-            radius: width/2
-            color: "black"
+            id: timeBox
+            width: 120
+            height: 50
+            color: "white"
+            opacity: 0.9
+            anchors.horizontalCenter: clock.horizontalCenter
+            anchors.top: clock.top
+            anchors.topMargin: 220
         }
 
-        TimeBox {}
+        Text
+        {
+            id: timeBoxText
+            anchors.centerIn: timeBox
+            text: (hours === 0 ? '12' : hours.toString()).padStart(2, '0') + ":" + minutes.toString().padStart(2, '0')
+            color: "black"
+            font.family: "helveticaneue"
+            font.pixelSize: 40
+            font.weight: 1000
+            font.bold: true
+        }
 }
