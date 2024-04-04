@@ -13,17 +13,83 @@ Item
         //UI
         Rectangle
         {
-            color: "white"
             id: clock
+            color: "white"
             height: root.height
             width: height
             radius: width/2
             border.color: "black"
             border.width: 40
 
+
+            Item
+            {
+                id: dashedCircleContainer
+
+                property int minuteRotation: minute_hand.rotation
+                height: parent.height / 2
+                transformOrigin: Item.Bottom
+                rotation: minuteRotation
+                x: parent.width / 2
+                y: 0
+
+                Rectangle
+                {
+                    color: "transparent"
+                    id: dashedCircleMinute
+                    height: 100
+                    width: 100
+                    radius: width/2
+                    anchors
+                    {
+                        horizontalCenter: parent.horizontalCenter
+                        top: parent.top
+                        topMargin: 40
+                    }
+                    x: 0
+                    y: parent.height * 0.06
+                    rotation: minute_hand.rotation
+                    border.color: "#E0E0E0"
+                    border.width: 4
+                }
+            }
+
+        Item
+        {
+            id: dashedCircleContainerHour
+
+            property int hourRotation: hour_hand.rotation
+            height: parent.height / 2
+            transformOrigin: Item.Bottom
+            rotation: hourRotation
+            x: parent.width / 2
+            y: 0
+
+            Rectangle
+            {
+                color: "transparent"
+                id: dashedCircleHour
+                height: 100
+                width: 100
+                radius: width/2
+                anchors
+                {
+                    horizontalCenter: parent.horizontalCenter
+                    top: parent.top
+                    topMargin: 40
+                }
+                x: 0
+                y: parent.height * 0.06
+                rotation: hour_hand.rotation
+                border.color: "#E0E0E0"
+                border.width: 4
+            }
+        }
+    }
+
             Repeater
             {
-
+                id: hourFigures
                 model: 12
 
                 Item
@@ -63,7 +129,7 @@ Item
                         rotation: 360 - index * 30
                         text: hourContainer.hour == 0 ? 12 : hourContainer.hour
                         font.pixelSize: parent.height * 0.2
-                        font.family: "helveticaneue"
+                        font.family: "Arial Black"
                         font.weight: 800
                         font.bold: true
                     }
@@ -75,14 +141,14 @@ Item
                         {
                             horizontalCenter: parent.horizontalCenter
                             top: parent.top
-                            topMargin: 10
+                            topMargin: 7
                         }
                         x: 0
                         y: parent.height * 0.06
                         rotation: 360 - index * 30
                         text: hourContainer.hour == 0 ? "00" : (hourContainer.hour * 5)
                         font.pixelSize: parent.height * 0.06
-                        font.family: "helveticaneue"
+                        font.family: "Arial Black"
                         font.weight: 800
                         color: "white"
                         font.bold: true
@@ -119,47 +185,70 @@ Item
                 }
 
             }
+
+        // live time mechanism
+        Timer
+        {
+            interval: 1000 //milliseconds
+            running: true
+            repeat: true
+            onTriggered:
+            {
+                second_hand.rotation += 6;
+                if (second_hand.rotation >= 360)
+                {
+                    second_hand.rotation = 0;
+                    minute_hand.rotation += 6;
+                    if(minute_hand.rotation % 12 == 0)
+                        hour_hand.rotation += 1;
+                }
+            }
+
         }
 
-        //Clock Logic
-
-        //time mechanism
-        // Timer {
-        //         interval: 1000 //milliseconds
-        //         running: true
-        //         repeat: true
-        //         onTriggered:
-        //         {
-        //             root.seconds++
-        //             if (root.seconds == 60)
-        //             {
-        //                 root.seconds = 0;
-        //                 root.minutes += 1;
-        //                 if (root.minutes == 60)
-        //                 {
-        //                     root.minutes = 0;
-        //                     root.hours++;
-        //                     if (root.hours == 13)
-        //                     {
-        //                         hours = 1;
-        //                     }
-        //                 }
-        //             }
-        //         }
-        //     }
-
-        SecondHand
+        Text
         {
+            id: dayTimeText
+            z: 0
+            text: ((hour_hand.rotation > 359 && hour_hand.rotation < 721) ? "PM" : "AM")
+            color: "#576570"
+            font.family: "Arial Black"
+            font.pixelSize: 18
+            font.weight: 1000
+            font.bold: true
+            anchors.horizontalCenter: clock.horizontalCenter
+            anchors.top: clock.top
+            anchors.topMargin: 275
+        }
+
+        HourHand
+        {
+            id: hour_hand
             anchors
             {
                 top: root.top
                 bottom: root.bottom
                 horizontalCenter: parent.horizontalCenter
             }
-            rotation: 0 //rotation value
+            rotation: 182
+            onUpdateMinuteHand:
+            {
+                minute_hand.rotation += newValue
+            }
         }
 
-        //where we draw and rotate the minute hand
+        SecondHand
+        {
+            id: second_hand
+            anchors
+            {
+                top: root.top
+                bottom: root.bottom
+                horizontalCenter: parent.horizontalCenter
+            }
+            rotation: 330
+        }
+
         MinuteHand
         {
             id: minute_hand
@@ -172,41 +261,36 @@ Item
             rotation: 24
             onUpdateHourHand:
             {
-                hour_hand.rotation += newValue
+                if (hour_hand.rotation > 720)
+                       hour_hand.rotation = 0;
+                else
+                    hour_hand.rotation += newValue
             }
         }
 
-        //where we draw and rotate the hour hand
-        HourHand
+        function displayMinutes(rotation)
         {
-            id: hour_hand
-            anchors
-            {
-                top: root.top
-                bottom: root.bottom
-                horizontalCenter: parent.horizontalCenter
-            }
-            rotation: 182 //rotation value
-            onUpdateMinuteHand:
-            {
-                minute_hand.rotation += newValue
-            }
+            var newRotation = rotation >= 0 ? rotation : 360 + (rotation % 360);
+            return Math.floor((newRotation / 6) % 60);
         }
 
-        function calculateTime(rotation, scale) {
-            var adjustedRotation = rotation >= 0 ? rotation : 360 + (rotation % 360);
-            return Math.floor((adjustedRotation / scale) % 60);
+        function displayHours(rotation)
+        {
+            var adjustedRotation = rotation >= 0 ? rotation % 360 : 360 + (rotation % 360);
+
+            if (adjustedRotation >= 360)
+            {
+                adjustedRotation = 0;
+            }
+
+            return Math.floor((adjustedRotation / 30) % 60);
         }
 
-        // Usage:
-        // Calculate hours
-        hours: calculateTime(hour_hand.rotation, 30)
+        hours: displayHours(hour_hand.rotation)
 
-        // Calculate minutes
-        minutes: calculateTime(minute_hand.rotation, 6)
+        minutes: displayMinutes(minute_hand.rotation)
 
-        // Set seconds to a fixed value
-        seconds: 55
+        seconds: 0
 
         Rectangle
         {
@@ -226,10 +310,9 @@ Item
             anchors.centerIn: timeBox
             text: (hours === 0 ? '12' : hours.toString()).padStart(2, '0') + ":" + minutes.toString().padStart(2, '0')
             color: "black"
-            font.family: "helveticaneue"
+            font.family: "Arial Black"
             font.pixelSize: 40
             font.weight: 1000
             font.bold: true
         }
-
 }

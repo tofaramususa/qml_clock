@@ -13,6 +13,22 @@ Item
 
     Rectangle
     {
+        id: dashLine
+        width: 4
+        z: 0
+        height: root.height * 0.3
+        color: "#E0E0E0"
+        opacity: 0.5
+        anchors
+        {
+            horizontalCenter: root.horizontalCenter
+        }
+        y: 40
+        antialiasing: true
+    }
+
+    Rectangle
+    {
         id: rect
         width: 15
         height: root.height * 0.3
@@ -50,4 +66,5 @@ Item
         }
         antialiasing: true
     }
+
 }
