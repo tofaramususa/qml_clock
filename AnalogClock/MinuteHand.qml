@@ -7,8 +7,9 @@ Item
     property int minutes: 0
     property real minuteCoordinateX: 0
     property real minuteCoordinateY: 0
+     property int deltaX: 0
 
-    signal updateMinute(int newValue)
+    signal updateHourHand(int newValue)
 
     Rectangle
     {
@@ -35,18 +36,19 @@ Item
 
             onPositionChanged:
             {
-                var deltaX = mouseX - root.minuteCoordinateX;
+                deltaX = mouseX - root.minuteCoordinateX;
                 if (deltaX < 0)
                 {
-                    root.rotation = (root.rotation - 6 + 360) % 360;
-
+                    root.rotation -= 6;
+                    if(!(root.rotation % 12 == 0))
+                       updateHourHand(-1)
                 }
                 if (deltaX > 0)
                 {
-                  root.rotation = (root.rotation + 6 + 360) % 360;
+                    root.rotation += 6;
+                    if((root.rotation % 12 == 0))
+                        updateHourHand(1)
                 }
-                root.minutes = (root.rotation / 360) * 60
-                updateMinute(root.minutes)
             }
         }
         antialiasing: true

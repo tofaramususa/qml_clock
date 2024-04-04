@@ -7,10 +7,13 @@ Item
     property int hours: 0
     property real hourCoordinateX: 0
     property real hourCoordinateY: 0
+    property int deltaX: 0
 
-    signal updateHours(int newValue)
+    signal updateMinuteHand(int newValue)
+
     Rectangle
     {
+        id: rect
         width: 15
         height: root.height * 0.3
         color: "black"
@@ -18,8 +21,8 @@ Item
         {
             horizontalCenter: root.horizontalCenter
         }
-
         y: 150
+
         MouseArea
         {
             anchors.fill: parent
@@ -32,22 +35,19 @@ Item
 
             onPositionChanged:
             {
-                var deltaX = mouseX - root.hourCoordinateX;
+                deltaX = mouseX - root.hourCoordinateX;
                 if(deltaX < 0)
-                    root.rotation = (root.rotation - 3 + 360) % 360;
+                {
+                    root.rotation -= 1;
+                    updateMinuteHand(-12);
+                }
                 if(deltaX > 0)
-                    root.rotation = (root.rotation + 3 + 360) % 360;
+                {
+                    root.rotation += 1;
+                    updateMinuteHand(12)
+                }
             }
         }
         antialiasing: true
-    }
-
-    onRotationChanged:
-    {
-        if (rotation % 12 === 0)
-        {
-            root.hours = (rotation / 360) * 12;
-            updateHours(root.hours);
-        }
     }
 }

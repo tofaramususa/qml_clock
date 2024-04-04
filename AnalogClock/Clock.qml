@@ -3,38 +3,14 @@ import QtQuick 2.15
 Item
 {
     id: root
-    property int hours: 4
-    property int minutes: 59
-    property int seconds: 55
     height: root.width < root.height ? root.width : root.height
     width: height
     anchors.centerIn: parent
+    property int hours
+    property int minutes
+    property int seconds
 
-
-    Timer {
-            interval: 1000 //milliseconds
-            running: true
-            repeat: true
-            onTriggered:
-            {
-                root.seconds++
-                if (root.seconds == 60)
-                {
-                    root.seconds = 0;
-                    root.minutes += 1;
-                    if (root.minutes == 60)
-                    {
-                        root.minutes = 0;
-                        root.hours++;
-                        if (root.hours == 13)
-                        {
-                            hours = 1;
-                        }
-                    }
-                }
-            }
-        }
-
+        //UI
         Rectangle
         {
             color: "white"
@@ -145,7 +121,33 @@ Item
             }
         }
 
-        //where we draw and rotate second hand
+        //Clock Logic
+
+        //time mechanism
+        // Timer {
+        //         interval: 1000 //milliseconds
+        //         running: true
+        //         repeat: true
+        //         onTriggered:
+        //         {
+        //             root.seconds++
+        //             if (root.seconds == 60)
+        //             {
+        //                 root.seconds = 0;
+        //                 root.minutes += 1;
+        //                 if (root.minutes == 60)
+        //                 {
+        //                     root.minutes = 0;
+        //                     root.hours++;
+        //                     if (root.hours == 13)
+        //                     {
+        //                         hours = 1;
+        //                     }
+        //                 }
+        //             }
+        //         }
+        //     }
+
         SecondHand
         {
             anchors
@@ -154,41 +156,57 @@ Item
                 bottom: root.bottom
                 horizontalCenter: parent.horizontalCenter
             }
-            rotation: (root.seconds / 60) * 360
+            rotation: 0 //rotation value
         }
-
 
         //where we draw and rotate the minute hand
         MinuteHand
         {
+            id: minute_hand
             anchors
             {
                 top: root.top
                 bottom: root.bottom
                 horizontalCenter: parent.horizontalCenter
             }
-            rotation: (root.minutes / 60) * 360
-            onUpdateMinute:
+            rotation: 24
+            onUpdateHourHand:
             {
-                root.minutes = newValue
+                hour_hand.rotation += newValue
             }
         }
 
         //where we draw and rotate the hour hand
         HourHand
         {
+            id: hour_hand
             anchors
             {
                 top: root.top
                 bottom: root.bottom
                 horizontalCenter: parent.horizontalCenter
             }
-            rotation: (root.hours / 12) * 360
-            onUpdateHours:
+            rotation: 182 //rotation value
+            onUpdateMinuteHand:
             {
-                root.hours = newValue
+                minute_hand.rotation += newValue
             }
         }
+
+        function calculateTime(rotation, scale) {
+            var adjustedRotation = rotation >= 0 ? rotation : 360 + (rotation % 360);
+            return Math.floor((adjustedRotation / scale) % 60);
+        }
+
+        // Usage:
+        // Calculate hours
+        hours: calculateTime(hour_hand.rotation, 30)
+
+        // Calculate minutes
+        minutes: calculateTime(minute_hand.rotation, 6)
+
+        // Set seconds to a fixed value
+        seconds: 55
 
         Rectangle
         {
@@ -213,4 +231,5 @@ Item
             font.weight: 1000
             font.bold: true
         }
+
 }
