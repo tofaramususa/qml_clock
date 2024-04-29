@@ -1,5 +1,6 @@
 import QtQuick 2.15
 
+//overall clock
 Item
 {
     id: root
@@ -10,181 +11,24 @@ Item
     property int minutes
     property int seconds
 
-        //UI
         Rectangle
         {
-            id: clock
+            id: clockBorder
             color: "white"
             height: root.height
             width: height
             radius: width/2
             border.color: "black"
             border.width: 40
-
-
-            Item
-            {
-                id: dashedCircleContainer
-
-                property int minuteRotation: minute_hand.rotation
-                height: parent.height / 2
-                transformOrigin: Item.Bottom
-                rotation: minuteRotation
-                x: parent.width / 2
-                y: 0
-
-                Rectangle
-                {
-                    color: "transparent"
-                    id: dashedCircleMinute
-                    height: 100
-                    width: 100
-                    radius: width/2
-                    anchors
-                    {
-                        horizontalCenter: parent.horizontalCenter
-                        top: parent.top
-                        topMargin: 40
-                    }
-                    x: 0
-                    y: parent.height * 0.06
-                    rotation: minute_hand.rotation
-                    border.color: "#E0E0E0"
-                    border.width: 4
-                }
-            }
-
-        Item
-        {
-            id: dashedCircleContainerHour
-
-            property int hourRotation: hour_hand.rotation
-            height: parent.height / 2
-            transformOrigin: Item.Bottom
-            rotation: hourRotation
-            x: parent.width / 2
-            y: 0
-
-            Rectangle
-            {
-                color: "transparent"
-                id: dashedCircleHour
-                height: 100
-                width: 100
-                radius: width/2
-                anchors
-                {
-                    horizontalCenter: parent.horizontalCenter
-                    top: parent.top
-                    topMargin: 40
-                }
-                x: 0
-                y: parent.height * 0.06
-                rotation: hour_hand.rotation
-                border.color: "#E0E0E0"
-                border.width: 4
-            }
         }
-    }
 
-            Repeater
-            {
-                id: hourFigures
-                model: 12
-
-                Item
-                {
-                    id: hourContainer
-
-                    property int hour: index
-                    height: parent.height / 2
-                    transformOrigin: Item.Bottom
-                    rotation: index * 30
-                    x: parent.width / 2
-                    y: 0
-
-                    Rectangle
-                    {
-
-                        height: parent.height * 0.07
-                        width: parent.height * 0.02
-                        color: "black"
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        anchors.top: parent.top
-                        anchors.topMargin: 40
-                        antialiasing: true
-                    }
-
-                    Text
-                    {
-                        id: hourText
-                        anchors
-                        {
-                            horizontalCenter: parent.horizontalCenter
-                            top: parent.top
-                            topMargin: 60
-                        }
-                        x: 0
-                        y: parent.height * 0.06
-                        rotation: 360 - index * 30
-                        text: hourContainer.hour == 0 ? 12 : hourContainer.hour
-                        font.pixelSize: parent.height * 0.2
-                        font.family: "Arial Black"
-                        font.weight: 800
-                        font.bold: true
-                    }
-
-                    Text
-                    {
-                        id: minuteText
-                        anchors
-                        {
-                            horizontalCenter: parent.horizontalCenter
-                            top: parent.top
-                            topMargin: 7
-                        }
-                        x: 0
-                        y: parent.height * 0.06
-                        rotation: 360 - index * 30
-                        text: hourContainer.hour == 0 ? "00" : (hourContainer.hour * 5)
-                        font.pixelSize: parent.height * 0.06
-                        font.family: "Arial Black"
-                        font.weight: 800
-                        color: "white"
-                        font.bold: true
-                    }
-
-                }
-            }
-
-            Repeater {
-
-                model: 60
-
-                Item
-                {
-                    id: minuteContainer
-
-                    property int minute: index
-                    height: parent.height / 2
-                    transformOrigin: Item.Bottom
-                    rotation: index * 6
-                    x: parent.width / 2
-                    y: 0
-
-                    Rectangle
-                    {
-                        height: parent.height * 0.05
-                        width: parent.height * 0.005
-                        color: "black"
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        anchors.top: parent.top
-                        anchors.topMargin: 40
-                        antialiasing: true
-                    }
-                }
-
-            }
+        ClockUI
+        {
+            id: clock_ui
+            height: parent.height;
+            width: parent.width;
+            colorType: "black"
+        }
 
         // live time mechanism
         Timer
@@ -203,27 +47,30 @@ Item
                         hour_hand.rotation += 1;
                 }
             }
-
         }
 
         Text
         {
             id: dayTimeText
             z: 0
+            visible: true
             text: ((hour_hand.rotation > 359 && hour_hand.rotation < 721) ? "PM" : "AM")
             color: "#576570"
             font.family: "Arial Black"
             font.pixelSize: 18
             font.weight: 1000
             font.bold: true
-            anchors.horizontalCenter: clock.horizontalCenter
-            anchors.top: clock.top
+            anchors.horizontalCenter: clockBorder.horizontalCenter
+            anchors.top: clockBorder.top
             anchors.topMargin: 275
         }
 
+        //this it hour hand
         HourHand
         {
             id: hour_hand
+            visible: true
+            dashVisible: true
             anchors
             {
                 top: root.top
@@ -237,6 +84,7 @@ Item
             }
         }
 
+        //this is the second hand
         SecondHand
         {
             id: second_hand
@@ -248,7 +96,7 @@ Item
             }
             rotation: 330
         }
-
+        //this is the minute hand
         MinuteHand
         {
             id: minute_hand
@@ -266,6 +114,8 @@ Item
                 else
                     hour_hand.rotation += newValue
             }
+            color: "black"
+            dashVisible: true
         }
 
         function displayMinutes(rotation)
@@ -295,6 +145,7 @@ Item
         Rectangle
         {
             id: timeBox
+            visible: true;
             width: 130
             height: 60
             color: "white"
@@ -302,17 +153,48 @@ Item
             anchors.horizontalCenter: clock.horizontalCenter
             anchors.top: clock.top
             anchors.topMargin: 220
+
+            Text
+            {
+                id: timeBoxText
+                anchors.centerIn: timeBox
+                text: (hours === 0 ? '12' : hours.toString()).padStart(2, '0') + ":" + minutes.toString().padStart(2, '0')
+                color: "black"
+                font.family: "Arial Black"
+                font.pixelSize: 40
+                font.weight: 1000
+                font.bold: true
+            }
         }
 
-        Text
+        ColorButtons
         {
-            id: timeBoxText
-            anchors.centerIn: timeBox
-            text: (hours === 0 ? '12' : hours.toString()).padStart(2, '0') + ":" + minutes.toString().padStart(2, '0')
-            color: "black"
-            font.family: "Arial Black"
-            font.pixelSize: 40
-            font.weight: 1000
-            font.bold: true
+            onUpdateBorderWidth:
+            {
+                clockBorder.border.color = color
+                minute_hand.color = color;
+                clock_ui.colorType = color;
+            }
+        }
+
+        VisibilityButtons
+        {
+            onUpdateVisibility:
+            {
+                if(value === "hour_hand")
+                 hour_hand.visible = !hour_hand.visible
+                if(value === "minute_hand")
+                    minute_hand.visible = !minute_hand.visible
+                if(value === "dash_lines")
+                {
+                    hour_hand.dashVisible = !hour_hand.dashVisible
+                    minute_hand.dashVisible = !minute_hand.dashVisible
+                }
+                if(value === "digital")
+                {
+                    timeBox.visible = !timeBox.visible
+                    dayTimeText.visible = !dayTimeText.visible
+                }
+            }
         }
 }

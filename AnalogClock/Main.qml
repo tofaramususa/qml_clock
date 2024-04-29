@@ -2,8 +2,9 @@ import QtQuick 2.15
 
 Window
 {
-    width: 750
-    height: 750
+    id: window
+    width: 850
+    height: 850
     visible: true
     title: qsTr("Analog Clock")
     color: "white"
@@ -13,5 +14,5 @@ Window
         id: clock
         width: 650
         height: 650
-    }
+     }
 }
