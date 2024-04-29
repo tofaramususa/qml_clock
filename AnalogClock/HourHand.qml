@@ -9,6 +9,8 @@ Item
     property real hourCoordinateY: 0
     property int deltaX: 0
     property bool dashVisible: true
+    height: parent.height
+    width: parent.width
 
     signal updateMinuteHand(int newValue)
 
@@ -16,7 +18,6 @@ Item
     {
         id: dashedLine
         width: 4
-        z: 0
         height: root.height * 0.3
         color: "#E0E0E0"
         opacity: 0.5
@@ -34,18 +35,18 @@ Item
     {
         id: rect
         width: 15
-        height: root.height * 0.3
+        height: root.height * 0.25
         color: "black"
         anchors
         {
             horizontalCenter: root.horizontalCenter
+            top: root.top
+            topMargin: 180
         }
-        y: 150
 
         MouseArea
         {
             anchors.fill: parent
-
             onPressed:
             {
                root.hourCoordinateX = mouseX
@@ -74,16 +75,15 @@ Item
     {
         id: dashedCircleContainerHour
 
-        height: parent.height / 2
-        x: parent.width / 2
-        y: 0
+        height: parent.height / 2.5
+        anchors.centerIn: dashedLine
         visible: dashVisible
         Rectangle
         {
             color: "transparent"
             id: dashedCircleHour
-            height: 100
-            width: 100
+            height: 113
+            width: 113
             radius: width/2
             anchors
             {

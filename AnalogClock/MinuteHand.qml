@@ -26,8 +26,8 @@ Item
         {
             color: "transparent"
             id: dashedCircleMinute
-            height: 100
-            width: 100
+            height: 113
+            width: 113
             radius: width/2
             anchors
             {
